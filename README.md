@@ -1,76 +1,122 @@
 <div align="center">
 
-# ThinkGraph
+<br>
 
-**Reasoning Trace Analysis Framework**
+# 🔬 ThinkGraph
 
-[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/Tests-25%20passed-brightgreen.svg)](tests/)
+### Reasoning Trace Analysis Framework
 
-Turn the black-box reasoning process of LLMs into measurable, comparable, and optimizable data assets.
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-10B981?style=for-the-badge)](LICENSE)
+[![Tests](https://img.shields.io/badge/Tests-25_passed-brightgreen?style=for-the-badge)](tests/)
+
+**Turn the black-box reasoning process of LLMs into measurable, comparable, and optimizable data assets.**
 
 将大语言模型的黑盒推理过程转化为可测量、可对比、可优化的数据资产。
+
+<br>
+
+<p align="center">
+  <img src="assets/reasoning_tree.png" width="100%" alt="Reasoning Tree">
+</p>
+
+<br>
 
 </div>
 
 ---
 
-## 🎯 What It Does / 它能做什么
+## 📖 Overview
 
-Input: Raw output text from thinking models (with `<think...>` blocks)
-Output: Structured reasoning graph, quality scores, and interactive visualization
-
-输入：Thinking Model 的原始输出文本（含推理块）
-输出：结构化推理图谱、质量评分报告、可交互可视化
-
----
-
-## ✨ Features / 功能特性
-
-| Feature | Description |
-|---------|-------------|
-| **Trace Extraction** | Automatically detect `<think...>` and `<thinking...>` tags / 自动提取思维链标签 |
-| **Step Segmentation** | Split reasoning into semantic steps by paragraphs, numbering, or pivots / 按语义边界切分推理步骤 |
-| **Graph Construction** | Build directed reasoning graph with logical relations / 构建带逻辑关系的推理有向图 |
-| **Quality Scoring** | 4-dimension scoring (Coherence, Efficiency, Depth, Confidence) + A/B/C/D grading / 四维质量评分 + 等级评定 |
-| **Interactive Viz** | PyVis reasoning tree + Plotly radar/timeline charts / 交互式推理树 + 雷达图/时间线 |
+| | Description |
+|:---:|:---|
+| **Input** | Raw output text from thinking models (with `<think...>` blocks) |
+| **Output** | Structured reasoning graph, quality scores, and interactive visualization |
+| **输入** | Thinking Model 的原始输出文本（含推理块） |
+| **输出** | 结构化推理图谱、质量评分报告、可交互可视化 |
 
 ---
 
-## 📸 Demo / 演示
+## ✨ Features
 
-### Reasoning Tree / 推理树
-
-![Reasoning Tree](assets/reasoning_tree.png)
-
-### Quality Radar / 质量雷达图
-
-![Metrics Radar](assets/metrics_radar.png)
-
-### Step Timeline / 步骤时间线
-
-![Step Timeline](assets/step_timeline.png)
-
-### Cross-Model Comparison / 跨模型对比
-
-![Comparison](assets/comparison.png)
+| # | Feature | Description |
+|:---:|:--------|:------------|
+| 1 | **Trace Extraction** | Automatically detect and extract `<think...>` / `<thinking...>` blocks |
+| 2 | **Step Segmentation** | Split reasoning into semantic steps by paragraphs, numbering, or pivot words |
+| 3 | **Graph Construction** | Build directed reasoning graph with logical relations (supports / contradicts / extends / backtracks / concludes) |
+| 4 | **Quality Scoring** | 4-dimension scoring + A/B/C/D grading system |
+| 5 | **Interactive Visualization** | PyVis reasoning tree + Plotly radar chart / timeline / comparison charts |
+| 6 | **Cross-Model Comparison** | Side-by-side analysis of outputs from different thinking models |
+| 7 | **CLI & API** | Full command-line interface and Python API |
 
 ---
 
-## 🚀 Quick Start / 快速上手
+## 📸 Gallery
 
-### Installation / 安装
+<table>
+<tr>
+<td align="center" width="50%">
+<img src="assets/reasoning_tree.png" width="100%"/><br>
+<b>Reasoning Trace Graph</b>
+</td>
+<td align="center" width="50%">
+<img src="assets/metrics_radar.png" width="100%"/><br>
+<b>Quality Metrics Radar</b>
+</td>
+</tr>
+<tr>
+<td align="center">
+<img src="assets/step_timeline.png" width="100%"/><br>
+<b>Step Confidence Timeline</b>
+</td>
+<td align="center">
+<img src="assets/comparison.png" width="100%"/><br>
+<b>Cross-Model Comparison</b>
+</td>
+</tr>
+<tr>
+<td colspan="2" align="center">
+<img src="assets/report_card.png" width="100%"/><br>
+<b>Quality Report Card</b>
+</td>
+</tr>
+</table>
+
+---
+
+## 📊 Metrics System
+
+| Metric | Weight | Formula | Description |
+|:------:|:------:|:--------|:------------|
+| **Coherence** | 30% | edge_count / node_count ratio | Logical consistency between reasoning steps |
+| **Efficiency** | 25% | 100 - backtrack_ratio | Fewer backtracks = higher efficiency |
+| **Depth** | 25% | max_depth / total_steps | Depth and hierarchy of reasoning chain |
+| **Confidence** | 20% | average step confidence | Mean confidence level across all steps |
+
+**Grading Scale:**
+
+| Grade | Score Range | Interpretation |
+|:-----:|:-----------:|:---------------|
+| **A** | 85 - 100 | Excellent reasoning quality |
+| **B** | 70 - 84 | Good with minor issues |
+| **C** | 55 - 69 | Acceptable, needs improvement |
+| **D** | 0 - 54 | Significant reasoning issues |
+
+---
+
+## 🚀 Quick Start
+
+### Installation
 
 ```bash
 git clone https://github.com/Apageoflove/ThinkGraph.git
 cd ThinkGraph
 python -m venv venv
-source venv/bin/activate   # Windows: venv\Scripts\activate
+source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -e ".[dev,demo]"
 ```
 
-### Python API
+### Python API (5 lines)
 
 ```python
 from thinkgraph import ThinkGraphAnalyzer
@@ -78,138 +124,169 @@ from thinkgraph import ThinkGraphAnalyzer
 analyzer = ThinkGraphAnalyzer()
 result = analyzer.analyze(open("response.txt").read(), model_name="deepseek-r1")
 
-print(f"Score: {result.metrics['overall_score']}/100 ({result.metrics['grade']})")
-print(f"Steps: {len(result.graph.steps)}")
-
-analyzer.visualize(result, output_dir="./output")
+print(result.metrics)          # -> {'overall_score': 72.5, 'grade': 'B', ...}
+analyzer.visualize(result)     # -> generates HTML + PNG files
 ```
 
-### CLI / 命令行
+### CLI
 
 ```bash
-# Analyze single model / 分析单个模型
+# Analyze a single model
 thinkgraph analyze -i response.txt --model deepseek-r1 -o ./output
 
-# Compare models / 对比模型
+# Compare two models side by side
 thinkgraph compare \
-  -i r1.txt -i qwq.txt \
+  -i r1_output.txt -i qwq_output.txt \
   -n DeepSeek-R1 -n QwQ-32B \
-  -q "Solve x² - 5x + 6 = 0"
+  -q "Solve x^2 - 5x + 6 = 0"
 
-# JSON output / JSON 输出
+# Get JSON output
 thinkgraph analyze -i response.txt --json-output
 ```
 
-### Gradio Demo / 可视化演示
+**Example output:**
+
+```
+Model: deepseek-r1
+Steps: 3
+Score: 53.7 (D)
+
+Issues:
+  - Reasoning chain too shallow (depth 0)
+  - No verification step detected
+
+Strengths:
+  - No backtracking detected, reasoning is linear
+  - High overall confidence
+```
+
+### Gradio Web Demo
 
 ```bash
 python demo/app.py
-# Open http://localhost:7860
+# Open http://localhost:7860 in browser
+```
+
+Paste any thinking model output, get real-time reasoning tree + metrics.
+
+---
+
+## 🏗 Architecture
+
+```
+Raw Model Output
+       |
+       v
++------------------+
+|  TraceExtractor  |    Extract <think...> block
++--------+---------+
+         |
+         v
++------------------+
+|  StepSegmenter   |    Split into ReasoningStep list
++--------+---------+
+         |
+         v
++------------------+
+| RelationDetector |    Detect logical relations between steps
++--------+---------+
+         |
+         v
++------------------+
+|   GraphBuilder   |    Build networkx DiGraph
++--------+---------+
+         |
+         v
++------------------+
+|  GraphAnalyzer   |    Compute graph structural features
++--------+---------+
+         |
+         v
++------------------+
+|  QualityScorer   |    Output quality metrics
++--------+---------+
+         |
+         v
++------------------+
+|   Visualizer     |    Interactive tree + charts
++------------------+
 ```
 
 ---
 
-## 🏗 Architecture / 架构
-
-```
-Raw Model Output / 原始模型输出
-        │
-        ▼
- ┌──────────────────┐
- │  TraceExtractor  │  Extract <think...> block / 提取推理块
- └────────┬─────────┘
-          ▼
- ┌──────────────────┐
- │  StepSegmenter   │  Split into reasoning steps / 切分推理步骤
- └────────┬─────────┘
-          ▼
- ┌──────────────────┐
- │ RelationDetector │  Detect step relations / 检测步骤关系
- └────────┬─────────┘
-          ▼
- ┌──────────────────┐
- │   GraphBuilder   │  Build networkx DiGraph / 构建有向图
- └────────┬─────────┘
-          ▼
- ┌──────────────────┐
- │  GraphAnalyzer   │  Compute graph features / 计算图特征
- └────────┬─────────┘
-          ▼
- ┌──────────────────┐
- │  QualityScorer   │  Output quality metrics / 输出质量指标
- └────────┬─────────┘
-          ▼
- ┌──────────────────┐
- │   Visualizer     │  Tree + Radar + Timeline / 可视化
- └──────────────────┘
-```
-
----
-
-## 📊 Metrics / 评分体系
-
-| Metric 指标 | Weight 权重 | Description 说明 |
-|:-----------:|:-----------:|:-----------------|
-| **Coherence** 连贯性 | 30% | Logical consistency between steps / 步骤间逻辑连贯程度 |
-| **Efficiency** 效率 | 25% | Reasoning efficiency (fewer backtracks = higher) / 推理效率（回溯越少越高） |
-| **Depth** 深度 | 25% | Depth of reasoning chain / 推理链深度和层次 |
-| **Confidence** 置信度 | 20% | Average step confidence / 步骤平均置信度 |
-
-**Grading / 等级:** A (≥85) | B (≥70) | C (≥55) | D (<55)
-
----
-
-## 📁 Project Structure / 项目结构
+## 📁 Project Structure
 
 ```
 ThinkGraph/
-├── thinkgraph/               # Core package / 核心包
-│   ├── parser/               # Text parsing / 文本解析
-│   │   ├── trace_extractor.py
-│   │   ├── step_segmenter.py
-│   │   └── relation_detector.py
-│   ├── graph/                # Graph construction / 图构建
-│   │   ├── models.py
-│   │   ├── builder.py
-│   │   └── analyzer.py
-│   ├── metrics/              # Quality scoring / 质量评分
-│   │   ├── quality_scorer.py
-│   │   └── comparator.py
-│   ├── visualizer/           # Visualization / 可视化
-│   │   ├── graph_viz.py
-│   │   └── report_viz.py
-│   ├── analyzer.py           # Main entry / 主入口
-│   └── cli.py                # CLI interface / 命令行接口
+├── thinkgraph/                   # Core package
+│   ├── parser/
+│   │   ├── trace_extractor.py    # Extract thinking blocks
+│   │   ├── step_segmenter.py     # Segment into reasoning steps
+│   │   └── relation_detector.py  # Detect step relations
+│   ├── graph/
+│   │   ├── models.py             # Data structures (dataclass)
+│   │   ├── builder.py            # Build networkx DiGraph
+│   │   └── analyzer.py           # Graph structural analysis
+│   ├── metrics/
+│   │   ├── quality_scorer.py     # 4-dimension quality scoring
+│   │   └── comparator.py         # Cross-model comparison
+│   ├── visualizer/
+│   │   ├── graph_viz.py          # PyVis + matplotlib tree
+│   │   └── report_viz.py         # Plotly radar / timeline / bar
+│   ├── analyzer.py               # Unified entry point
+│   └── cli.py                    # Click CLI interface
 ├── demo/
-│   └── app.py                # Gradio demo
+│   └── app.py                    # Gradio web demo
 ├── examples/
-│   ├── sample_r1_output.txt
-│   └── sample_qwq_output.txt
-├── tests/                    # 25 test cases / 25 个测试用例
+│   ├── sample_r1_output.txt      # DeepSeek-R1 sample
+│   └── sample_qwq_output.txt     # QwQ-32B sample
+├── tests/                        # 25 test cases
 ├── setup.py
-├── requirements.txt
-└── README.md
+└── requirements.txt
 ```
 
 ---
 
-## 🧪 Run Tests / 运行测试
+## 🧪 Run Tests
 
 ```bash
 source venv/bin/activate
 pytest tests/ -v
+
+# Expected output:
+# ============================= test session starts ==============================
+# tests/test_parser.py::TestTraceExtractor::test_extract_think_tags PASSED
+# tests/test_parser.py::TestStepSegmenter::test_segment_steps PASSED
+# tests/test_graph.py::TestGraphBuilder::test_build_graph PASSED
+# tests/test_metrics.py::TestQualityScorer::test_scorer_output_fields PASSED
+# ...
+# ============================== 25 passed in 1.46s =============================
 ```
 
 ---
 
-## 🗺 Roadmap / 计划
+## 🔧 Tech Stack
 
-- [ ] Streaming input support / 支持 streaming 输入实时分析
-- [ ] LLM-as-judge integration for better step classification / 集成 LLM 做更精准的分类
-- [ ] Benchmark dataset and leaderboard / 推理质量 benchmark 数据集和排行榜
+| Component | Technology |
+|:---------:|:----------:|
+| Graph | [networkx](https://networkx.org/) |
+| Interactive Tree | [pyvis](https://pyvis.readthedocs.io/) |
+| Static Charts | [matplotlib](https://matplotlib.org/) |
+| Dynamic Charts | [plotly](https://plotly.com/python/) |
+| Web Demo | [gradio](https://gradio.app/) |
+| Data | [pandas](https://pandas.pydata.org/) |
+| CLI | [click](https://click.palletsprojects.com/) |
 
 ---
 
-## 📄 License / 许可证
+## 🗺 Roadmap
+
+- [ ] Streaming input support for real-time analysis
+- [ ] LLM-as-judge integration for smarter step classification
+- [ ] Benchmark dataset and public leaderboard
+
+---
+
+## 📄 License
 
 [MIT](LICENSE)
