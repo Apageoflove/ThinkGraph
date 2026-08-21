@@ -1,6 +1,3 @@
-# 🔬 ThinkGraph
-
-### 推理轨迹分析框架
 
 # 🔬 ThinkGraph
 
@@ -9,7 +6,6 @@
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-10B981?style=for-the-badge)](LICENSE)
 [![Tests](https://img.shields.io/badge/Tests-25_passed-brightgreen?style=for-the-badge)](tests/)
-[![English](https://img.shields.io/badge/README-English-3B82F6?style=for-the-badge)](#-thinkgraph)
 
 **将大语言模型的黑盒推理过程转化为可测量、可对比、可优化的数据资产。**
 
