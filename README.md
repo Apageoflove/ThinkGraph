@@ -1,5 +1,12 @@
 <div align="center">
 
+🌐 **[English](#english)** · **[中文](#chinese)**
+
+</div>
+
+<a id="english"></a>
+<div align="center">
+
 <br>
 
 # 🔬 ThinkGraph
@@ -304,6 +311,8 @@ pytest tests/ -v
 </div>
 
 ---
+
+<a id="chinese"></a>
 
 ## 📖 项目简介
 
