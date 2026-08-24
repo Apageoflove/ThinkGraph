@@ -10,8 +10,9 @@ from thinkgraph.graph.models import ReasoningStep
 _MIN_STEP_LEN = 10
 _MAX_STEP_LEN = 500
 
+# (?!\d) keeps decimals like 1.4142 from being read as the list marker "1."
 _EXPLICIT_NUM = re.compile(
-    r"(?:^|\n)\s*(?:Step\s*\d+[:.]\s*|\d+[.)]\s*)", re.IGNORECASE
+    r"(?:^|\n)\s*(?:Step\s*\d+[:.]\s*|\d+[.)](?!\d)\s*)", re.IGNORECASE
 )
 _PARAGRAPH_SPLIT = re.compile(r"\n{2,}")
 

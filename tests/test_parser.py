@@ -23,6 +23,19 @@ class TestTraceExtractor:
         text = "Just plain text without tags"
         assert self.ext.extract(text) == text
 
+    def test_extract_unclosed_think_tag(self):
+        # R1-style output truncated by max_tokens: no closing tag arrives.
+        text = "<think>\nreasoning got cut off mid derivation"
+        assert self.ext.extract(text) == "reasoning got cut off mid derivation"
+
+    def test_extract_unclosed_thinking_tag(self):
+        text = "<thinking>partial trace with no end in sight"
+        assert self.ext.extract(text) == "partial trace with no end in sight"
+
+    def test_tag_mentioned_in_body_not_stripped(self):
+        text = "The model may print <think> as literal example text."
+        assert self.ext.extract(text) == text
+
     def test_has_thinking_trace_true(self):
         assert self.ext.has_thinking_trace("<thinkabc</think")
         assert self.ext.has_thinking_trace("<thinkingabc</thinking")
@@ -65,6 +78,37 @@ class TestStepSegmenter:
 
     def test_empty_input(self):
         assert self.seg.segment("") == []
+
+    def test_decimal_at_line_start_not_treated_as_marker(self):
+        # Lines starting with constants like 1.4142 must keep their digits;
+        # previously the "1." was eaten as a list marker.
+        text = (
+            "We now compute the needed square roots for later use.\n"
+            "1.4142135623 is the square root of two to ten digits.\n"
+            "1.7320508075 is the square root of three to ten digits."
+        )
+        steps = self.seg.segment(text)
+        joined = "\n".join(s.content for s in steps)
+        assert "1.4142135623" in joined
+        assert "1.7320508075" in joined
+
+    def test_numbered_list_still_segments(self):
+        text = (
+            "1. First compute the squares of both numbers carefully.\n"
+            "2. Then compare the two results to see which is larger.\n"
+            "3. Finally report the larger value as our answer."
+        )
+        steps = self.seg.segment(text)
+        assert len(steps) == 3
+
+    def test_step_labels_still_segments(self):
+        text = (
+            "Step 1: Assume the equation factors into two linear terms.\n"
+            "Step 2: Expand and compare coefficients on both sides.\n"
+            "Step 3: Therefore the roots are x=2 and x=3."
+        )
+        steps = self.seg.segment(text)
+        assert len(steps) == 3
 
 
 class TestRelationDetector:

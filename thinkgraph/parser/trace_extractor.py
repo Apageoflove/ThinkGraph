@@ -14,6 +14,11 @@ class TraceExtractor:
         r"<thinking(?:[^>]*>)?(.*?)(?:</thinking\s*>|</thinking)",
         re.DOTALL,
     )
+    # Openers used when the closing tag never arrives (output truncated by
+    # max_tokens mid-reasoning). Anchored to the start of the text so tags
+    # mentioned inside the body are not touched.
+    _THINK_OPEN = re.compile(r"<think(?!ing)[^>]*>")
+    _THINKING_OPEN = re.compile(r"<thinking[^>]*>")
 
     def extract(self, raw_text: str) -> str:
         stripped = raw_text.strip()
@@ -27,6 +32,12 @@ class TraceExtractor:
         m = self._THINKING_PATTERN.search(stripped)
         if m:
             return m.group(1).strip()
+
+        open_m = self._THINK_OPEN.match(stripped) or self._THINKING_OPEN.match(
+            stripped
+        )
+        if open_m:
+            return stripped[open_m.end():].strip()
 
         return stripped
 
