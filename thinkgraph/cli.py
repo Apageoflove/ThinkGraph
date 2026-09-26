@@ -72,6 +72,30 @@ def compare(inputs, names, question, output):
     click.echo(f"\nComparison chart saved to {output}/comparison_bar.html")
 
 
+@main.command()
+@click.option("--input", "-i", "input_file", required=True, help="Path to model output file")
+@click.option(
+    "--format", "-f", "fmt",
+    type=click.Choice(["dot", "mermaid", "json"]),
+    default="mermaid",
+    help="Export format",
+)
+@click.option("--output", "-o", required=True, help="Output file path")
+def export(input_file, fmt, output):
+    """Export a trace's reasoning graph as DOT, Mermaid, or JSON."""
+    import os
+
+    from thinkgraph.visualizer import export as export_mod
+
+    text = _read_input(input_file)
+    analyzer = ThinkGraphAnalyzer()
+    result = analyzer.analyze(text)
+
+    writer = {"dot": export_mod.to_dot, "mermaid": export_mod.to_mermaid, "json": export_mod.to_json}[fmt]
+    writer(result.graph.graph, path=output)
+    click.echo(f"Graph exported to {output}")
+
+
 def _read_input(path: str) -> str:
     if path == "-":
         return sys.stdin.read()
