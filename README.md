@@ -131,6 +131,9 @@ thinkgraph compare \
 
 # JSON 格式输出
 thinkgraph analyze -i response.txt --json-output
+
+# 导出推理图（GraphViz DOT / Mermaid / JSON，可直接粘贴进 Markdown）
+thinkgraph export -i response.txt -f mermaid -o graph.mmd
 ```
 
 **输出示例：**
